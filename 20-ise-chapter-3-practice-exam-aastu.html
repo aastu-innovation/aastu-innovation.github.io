@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Chapter 3- Introduction to Software Engineering</title>
+    <meta content="Chapter 3- Introduction to Software Engineering Practice Exam at Addis Ababa Science and Technology University" name="description">
+    <meta content="" name="keywords">
+
+    <meta content="Chapter 3- Introduction to Software Engineering Practice Exam " name="description">
+    <meta content="aastu" name="keywords">
+    <meta property="og:title" content="Chapter 3- Introduction to Software Engineering Practice Exam">
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="This is Some Question from Introduction to Software Engineering Course Second year software engienering Practice Exam">
+    <meta property="og:image" content="preview-ise.jpg">
+    <meta property="og:url" content="https://innovate-aastu.github.io/20-ise-chapter-3-practice-exam-aastu.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Bootslander - v4.7.1
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <style>
+        @font-face {
+            font-family: customfont;
+            src: url(font/gotham_light.ttf);
+        }
+        
+        @font-face {
+            font-family: customfontbold;
+            src: url(font/gothambold.ttf);
+        }
+        
+        @font-face {
+            font-family: google;
+            src: url(font/google_sans.ttf);
+        }
+    </style>
+    <style>
+        body {}
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .quiz-container {
+            font-family: customfont;
+            max-width: 700px;
+            min-height: 500px;
+            background-color: white;
+            margin: 30px auto;
+            border-radius: 8px;
+            padding: 30px;
+        }
+        
+        .question-number h3 {
+            color: #009788;
+            border-bottom: 1px solid #ccc;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        
+        .question {
+            font-size: 24px;
+            color: black;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .options div {
+            background-color: #ccc;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .options div.disabled {
+            pointer-events: none;
+        }
+        
+        .options div.correct {
+            z-index: 1;
+            color: white;
+        }
+        
+        .options div.correct::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: green;
+            z-index: -1;
+            animation: animateBackground 1s ease;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes animateBackground {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+        
+        .options div.wrong {
+            z-index: 1;
+            color: white;
+        }
+        
+        .options div.wrong::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            z-index: -1;
+            animation: animateBackground 1s ease;
+            animation-fill-mode: forwards;
+        }
+        
+        .button .btn {
+            padding: 10px 30px;
+            background-color: #009688;
+            font-size: 18px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .answers-tracker div {
+            height: 40px;
+            width: 40px;
+            background-color: #ccc;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .answers-tracker div.correct {
+            background-color: green;
+            background-image: url('img/correct.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+        }
+        
+        .answers-tracker div.wrong {
+            background-color: red;
+            background-image: url('img/wrong.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+        }
+        
+        .quiz-over {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .show {
+            display: flex;
+        }
+        
+        .quiz-over .box {
+            background-color: #0e1b22;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            flex-basis: 700px;
+            max-width: 700px;
+            color: white;
+            box-shadow: #05090a;
+        }
+        
+        .quiz-over .box h1 {
+            font-size: 36px;
+            margin: 0 0 20px
+        }
+        
+        .quiz-over .box button {
+            padding: 15px 50px;
+            border: none;
+            background-color: #f7b53c;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 15px 0 20px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="font-family:customfont;">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <div class="logo">
+                <h1><a href="index.html" style="font-size: 19px; font-family:customfontbold;"><span>INNOVATE AASTU</span></a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#details">Blog</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#gallery">Gallery</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#team">Team</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Sample Questions</h2>
+                    <ol>
+                        <li><a href="index.html">Blog</a></li>
+                        <li>ISE Chapter 3</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Breadcrumbs Section -->
+
+        <section class="inner-page">
+            <div class="quiz-container">
+                <div class="question-number">
+                    <h3>Question <span class="question-num-value"></span> of
+                        <span class="total-questions"></span>
+                    </h3>
+                </div>
+                <div class="question">
+                    How do you declare a Javascript variable?
+                </div>
+                <div class="options">
+                    <div id="0" class="option1" onclick="check(this)"></div>
+                    <div id="1" class="option2" onclick="check(this)"></div>
+                    <div id="2" class="option3" onclick="check(this)"></div>
+                    <div id="3" class="option4" onclick="check(this)"></div>
+                </div>
+                <div class="button btn">
+                    <button type="button" onclick="next()" class="btn">Next</button>
+                </div>
+                <div class="answers-tracker">
+
+                </div>
+            </div>
+            <div class="quiz-over">
+                <div class="box">
+                    <h1>Result! <br /> You got <span class="correct-answers"></span> out of
+                        <span class="total-questions2"></span> answers correct. That is <span class="percentage"></span> Try Again
+                    </h1>
+                    <button type="button" onclick="tryAgain()">Close!</button>
+                </div>
+            </div>
+
+            <div class="a" style="text-align: center; font-size: 17px;margin-top: 20px;">
+                INNOVATE AASTU is <span style="color: red;">Second Year Students</span> Team.<br> We are tech Enthusiastic student with aim to design, develope and share innovation in the campus.
+                <a href="https://t.me/innovate_aastu" class="instagram"> Join Us</a>
+            </div>
+        </section>
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>Our social media</h3>
+
+                            <div class="social-links mt-3">
+                                <a href="https://twitter.com/aastu_edu" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="https://facebook.com/gemechis.m.elias" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="https://t.me/innovate_aastu" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="https://t.me/innovate_aastu" class="google-plus"><i class="bx bxl-telegram"></i></a>
+                                <a href="#" class="https://linkedin.cim//in/gemechis-elias"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://elearning.aastu.edu.et">Student Info</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://elibrary.aastu.edu.et">E-Learning</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://studentinfo.aastu.edu.et">E-Library</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://t.me/aastu_poll">AASTU POLL</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Projects</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://play.google.com/store/apps/details?id=com.gemechiselias.aastu">AASTU STUDENTS APP</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="t.me/aastugallery">AASTU GALLERY</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="software-entrance.html">AASTU Software Entreance</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://play.google.com/store/apps/details?id=com.gemechiselias.universityinfo">UNIVERSITY INFO</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Mission</h4>
+                        <p>We are students at AASTU with a vision to create the platform that help students throughout thier academic duration. We will keep adding new innovation and updates on this page.</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input style="background-image: linear-gradient(to right, #01A8FF, #9500D0);" type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>INNOVATE AASTU</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/ -->
+                Designed by <a href="https://t.me/realgemechis/">Gemechis Elias</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const answersTrackerContainer = document.querySelector(".answers-tracker")
+        const options = document.querySelector(".options").children
+        const questionNumberSpan = document.querySelector(".question-num-value")
+        const question = document.querySelector(".question")
+        const totalQuestionsSpan = document.querySelector(".total-questions")
+        const correctAnswersSpan = document.querySelector(".correct-answers")
+        const totalQuestionsSpan2 = document.querySelector(".total-questions2")
+        const percentageSpan = document.querySelector(".percentage")
+
+        let currentIndex;
+        let index = 0;
+        let answeredQuestions = []; // array of anwered question indexes
+        let score = 0;
+
+        const opt1 = document.querySelector(".option1")
+        const opt2 = document.querySelector(".option2")
+        const opt3 = document.querySelector(".option3")
+        const opt4 = document.querySelector(".option4")
+
+        const questions = [{
+                q: '____ is considered to be a collection of executable programming code, associated libraries and documentations.',
+                options: ['A. Program ', 'B. Software ', 'C. Modules ', 'D. Code '],
+                answer: 1
+            }, {
+                q: 'Which one of the following not true about why Software Engineering is required:',
+                options: ['To manage large software  ', 'For more scalability ', ' Cost Management ', 'none '],
+                answer: 3
+            }, {
+                q: 'IEEE defines software engineering as: ',
+                options: ['Study of desining, developing and maintaing to produce efficient, durable, scalable, in-budget and on-time software products  ', 'The branch of computer science, which uses well-defined engineering concepts required to produce software products ', 'The application of a systematic, disciplined, quantifiable approach to the development, operation and maintenance of software', 'None '],
+                answer: 2
+            }, {
+                q: 'One is not among Six Key Qualities of Software Professionalism:',
+                options: ['Demand Quality ', 'Be Stable ', 'Continually Produce', 'Be hamble'],
+                answer: 3
+            }, {
+                q: 'Software Accreditation is:',
+                options: ['A formal recognition of a level of proficiency in the information technology (IT) quality assurance industry', 'A document that provides legally binding guidelines for the use and distribution of software', 'A third party attestation related to a conformity assessment body such as certification body showing formal demonstration of its competence to carry out tasks', 'ethical principles that govern decisions and behavior at a company or organization'],
+                answer: 2
+            }, {
+                q: 'In software engineering, the hardest part is designing',
+                options: ['True', 'False', ' ', ' '],
+                answer: 0
+            }, {
+                q: 'The probability that the software will execute for a particular period of time without failure',
+                options: ['Software Effectiveness', 'Software reliability', 'Reduces complexity:', 'none'],
+                answer: 1
+            }, {
+                q: 'Accrediting Board for Engineering and Technology (ABET) is:',
+                options: ['the accrediting body for Europe software engineering programs', 'the accrediting body for Western software engineering programs', 'the accrediting body for US software engineering programs', 'none'],
+                answer: 2
+            }, {
+                q: '____is formal recognition of a level of proficiency in the information technology (IT) quality assurance industry',
+                options: ['Software Certification', 'Software Licence', 'Software Accreditation', 'Software Development'],
+                answer: 0
+            }, {
+                q: 'Two important techniques to reduce problem complexity in Software engineering principles is:',
+                options: ['testing and implmenting', 'abstraction and disintegration', 'abstraction and decomposition', 'none'],
+                answer: 2
+            }, {
+                q: 'Abstraction in Software engineering principles is:',
+                options: ['Simplifying problems by omitting irrelevant details.', 'complex problem is divided into several smaller problems and then the smaller problems solved one by one', 'smaller problem are marged to complex problems and solved', 'none'],
+                answer: 0
+            }, {
+                q: 'Which one is not the certifications supported by the International Software Certification Board (ISCB):',
+                options: ['Certified Associate in Software Quality (CASQ)', 'Certified Software Tester (CSTE) ', 'Certified Manager of Software Testing (CMST)', 'Certified Developers of Software Engineering (CDSE)'],
+                answer: 3
+            }, {
+                q: '___ is a document that provides legally binding guidelines for the use and distribution of software:',
+                options: ['Software Certification', 'Software Licence', 'Software Accreditation', 'Software Development'],
+                answer: 1
+            }, {
+                q: 'One of the following is  the most permissive type of software license:',
+                options: ['Public domain', ' LGPL', 'Copyleft', 'none'],
+                answer: 0
+            }, {
+                q: 'Which type of software license allows you to link to open-source libraries in your software:',
+                options: ['Permissive licenses', 'Copyleft', 'Public domain', 'Lesser General Public License'],
+                answer: 3
+            }, {
+                q: 'Which type of software license  allow you to modify the licensed code and distribute new works based on it, as long as you distribute any new works or adaptations under the same software license ',
+                options: ['Lesser General Public License', 'Public domain', 'Copyleft', 'all except A'],
+                answer: 2
+            }, {
+                q: 'Type of software license   used for proprietary software where the work may not be modified or redistributed.  ',
+                options: ['Proprietary', 'Permissive', 'Copyleft ', 'Public domain'],
+                answer: 0
+            }, {
+                q: 'Software engineers shall act in a manner that is the best interest of their client and employer, consistent with the public interest',
+                options: ['Public', 'Client and Employer ', 'Judgment', 'Management'],
+                answer: 1
+            }, {
+                q: ' A code of ethics is important because it helps employees or organization members make decisions that are in line with company values in the absence of a clear rule or direct supervision',
+                options: ['False', 'True', ' ', ' '],
+                answer: 1
+            }, {
+                q: 'Software engineers shall participate in lifelong learning regarding the practice of their profession and shall promote an ethical approach to the practice of the profession',
+                options: ['Public', 'Judgment ', 'Self', 'None of above'],
+                answer: 2
+            }
+
+        ]
+
+        totalQuestionsSpan.innerHTML = questions.length
+
+        function load() {
+            questionNumberSpan.innerHTML = index + 1
+            question.innerHTML = questions[currentIndex].q;
+            opt1.innerHTML = questions[currentIndex].options[0]
+            opt2.innerHTML = questions[currentIndex].options[1]
+            opt3.innerHTML = questions[currentIndex].options[2]
+            opt4.innerHTML = questions[currentIndex].options[3]
+            index++
+        }
+
+        //Check if selected answer is correct or wrong
+        function check(element) {
+            if (element.id == questions[currentIndex].answer) {
+                element.className = "correct"
+                updateAnswersTracker("correct")
+                score++
+            } else {
+                element.className = "wrong"
+                updateAnswersTracker("wrong")
+            }
+            disableClick();
+        }
+
+        //Make sure the user selected an item before clicking on the Next button
+        function validate() {
+            if (!options[0].classList.contains("disabled")) {
+                alert("Please select an option")
+            } else {
+                randomQuestion();
+                enableClick();
+            }
+        }
+
+        //Listener function for click event on Next button
+        function next() {
+            validate();
+        }
+
+        //Function to disable click for the options
+        function disableClick() {
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.add("disabled")
+
+                if (options[i].id == questions[currentIndex].answer) {
+                    options[i].classList.add('correct');
+                }
+            }
+        }
+
+        //Function to reanable click in the options
+        function enableClick() {
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove("disabled", "correct", "wrong")
+
+            }
+        }
+
+        //Function to select a random question
+        function randomQuestion() {
+            let randomNumber = Math.floor(Math.random() * questions.length);
+            if (index == questions.length) {
+                quizOver();
+            } else {
+                if (answeredQuestions.length > 0) {
+                    if (answeredQuestions.includes(randomNumber)) {
+                        randomQuestion();
+                    } else {
+                        currentIndex = randomNumber;
+                        load();
+                    }
+                }
+                if (answeredQuestions.length == 0) {
+                    currentIndex = randomNumber
+                    load()
+                }
+                //add the question to list of anwered questions
+                answeredQuestions.push(randomNumber)
+            }
+        }
+
+        //Restart the quiz
+        window.onload = function() {
+            this.randomQuestion();
+            this.answersTracker();
+        }
+
+        //Set up answers tracker elements
+        function answersTracker() {
+            for (let i = 0; i < questions.length; i++) {
+                const div = document.createElement("div")
+                answersTrackerContainer.appendChild(div);
+            }
+        }
+
+        //Update the answers tracker elements
+        function updateAnswersTracker(newClass) {
+            answersTrackerContainer.children[index - 1].classList.add(newClass)
+        }
+
+        //Displays the quiz-over page if quiz is over
+        function quizOver() {
+            document.querySelector(".quiz-over").classList.add("show")
+            correctAnswersSpan.innerHTML = score;
+            totalQuestionsSpan2.innerHTML = questions.length
+            percentageSpan.innerHTML = Math.round((score / questions.length) * 100) + "%"
+        }
+
+        function tryAgain() {
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
