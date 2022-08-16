@@ -1,1 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>ፕሮግራምንግ ለጀማሪዎች በአማሪኛ ክፍል አንድ </title>
+    <meta content="This is programming tutorial prepared in amharic language" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Bootslander - v4.7.1
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <style>
+        @font-face {
+            font-family: customfont;
+            src: url(font/gotham_light.ttf);
+        }
+        
+        @font-face {
+            font-family: customfontbold;
+            src: url(font/gothambold.ttf);
+        }
+        
+        @font-face {
+            font-family: google;
+            src: url(font/google_sans.ttf);
+        }
+    </style>
+    <style>
+        body {}
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .quiz-container {
+            font-family: customfont;
+            max-width: 700px;
+            min-height: 500px;
+            background-color: white;
+            margin: 30px auto;
+            border-radius: 8px;
+            padding: 30px;
+        }
+        
+        .question-number h3 {
+            color: #009788;
+            border-bottom: 1px solid #ccc;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        
+        .question {
+            font-size: 24px;
+            color: black;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .options div {
+            background-color: #ccc;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .options div.disabled {
+            pointer-events: none;
+        }
+        
+        .options div.correct {
+            z-index: 1;
+            color: white;
+        }
+        
+        .options div.correct::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: green;
+            z-index: -1;
+            animation: animateBackground 1s ease;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes animateBackground {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+        
+        .options div.wrong {
+            z-index: 1;
+            color: white;
+        }
+        
+        .options div.wrong::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            z-index: -1;
+            animation: animateBackground 1s ease;
+            animation-fill-mode: forwards;
+        }
+        
+        .button .btn {
+            padding: 10px 30px;
+            background-color: #009688;
+            font-size: 18px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .answers-tracker div {
+            height: 40px;
+            width: 40px;
+            background-color: #ccc;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .answers-tracker div.correct {
+            background-color: green;
+            background-image: url('img/correct.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+        }
+        
+        .answers-tracker div.wrong {
+            background-color: red;
+            background-image: url('img/wrong.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+        }
+        
+        .quiz-over {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .show {
+            display: flex;
+        }
+        
+        .quiz-over .box {
+            background-color: #0e1b22;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            flex-basis: 700px;
+            max-width: 700px;
+            color: white;
+            box-shadow: #05090a;
+        }
+        
+        .quiz-over .box h1 {
+            font-size: 36px;
+            margin: 0 0 20px
+        }
+        
+        .quiz-over .box button {
+            padding: 15px 50px;
+            border: none;
+            background-color: #f7b53c;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 15px 0 20px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="font-family:customfont;">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <div class="logo">
+                <h1><a href="index.html" style="font-size: 19px; font-family:customfontbold;"><span>INNOVATE AASTU</span></a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#details">Blog</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#gallery">Gallery</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#team">Team</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Sample Questions</h2>
+                    <ol>
+                        <li><a href="index.html">Blog</a></li>
+                        <li>25 Technology Questions</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Breadcrumbs Section -->
+
+        <section class="inner-page">
+            <div class="quiz-container">
+                <div class="question-number">
+                    <h3>Question <span class="question-num-value"></span> of
+                        <span class="total-questions"></span>
+                    </h3>
+                </div>
+                <div class="question">
+                    How do you declare a Javascript variable?
+                </div>
+                <div class="options">
+                    <div id="0" class="option1" onclick="check(this)"></div>
+                    <div id="1" class="option2" onclick="check(this)"></div>
+                    <div id="2" class="option3" onclick="check(this)"></div>
+                    <div id="3" class="option4" onclick="check(this)"></div>
+                </div>
+                <div class="button btn">
+                    <button type="button" onclick="next()" class="btn">Next</button>
+                </div>
+                <div class="answers-tracker">
+
+                </div>
+            </div>
+            <div class="quiz-over">
+                <div class="box">
+                    <h1>Result! <br /> You got <span class="correct-answers"></span> out of
+                        <span class="total-questions2"></span> answers correct. That is <span class="percentage"></span> Try Again
+                    </h1>
+                    <button type="button" onclick="tryAgain()">Close!</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>Our social media</h3>
+
+                            <div class="social-links mt-3">
+                                <a href="https://twitter.com/aastu_edu" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="https://facebook.com/gemechis.m.elias" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="https://t.me/innovate_aastu" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="https://t.me/innovate_aastu" class="google-plus"><i class="bx bxl-telegram"></i></a>
+                                <a href="#" class="https://linkedin.cim//in/gemechis-elias"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://elearning.aastu.edu.et">Student Info</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://elibrary.aastu.edu.et">E-Learning</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://studentinfo.aastu.edu.et">E-Library</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://t.me/aastu_poll">AASTU POLL</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Projects</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://play.google.com/store/apps/details?id=com.gemechiselias.aastu">AASTU STUDENTS APP</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="t.me/aastugallery">AASTU GALLERY</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="software-entrance.html">AASTU Software Entreance</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://play.google.com/store/apps/details?id=com.gemechiselias.universityinfo">UNIVERSITY INFO</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Mission</h4>
+                        <p>We are students at AASTU with a vision to create the platform that help students throughout thier academic duration. We will keep adding new innovation and updates on this page.</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input style="background-image: linear-gradient(to right, #01A8FF, #9500D0);" type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>INNOVATE AASTU</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/ -->
+                Designed by <a href="https://t.me/realgemechis/">Gemechis Elias</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const answersTrackerContainer = document.querySelector(".answers-tracker")
+        const options = document.querySelector(".options").children
+        const questionNumberSpan = document.querySelector(".question-num-value")
+        const question = document.querySelector(".question")
+        const totalQuestionsSpan = document.querySelector(".total-questions")
+        const correctAnswersSpan = document.querySelector(".correct-answers")
+        const totalQuestionsSpan2 = document.querySelector(".total-questions2")
+        const percentageSpan = document.querySelector(".percentage")
+
+        let currentIndex;
+        let index = 0;
+        let answeredQuestions = []; // array of anwered question indexes
+        let score = 0;
+
+        const opt1 = document.querySelector(".option1")
+        const opt2 = document.querySelector(".option2")
+        const opt3 = document.querySelector(".option3")
+        const opt4 = document.querySelector(".option4")
+
+        const questions = [{
+                q: 'which of the following best describes meta data?',
+                options: ['A. It conforms to a tabular format ', 'B. It was extremely power full data ', 'C. It provides fields for dates and locations ', 'D. It was a separate data structure '],
+                answer: 3
+            }, {
+                q: 'Which one is not currently available emerged technologies',
+                options: ['DevOps ', 'Intelligent Apps (I-Apps) ', ' FORTRAN ', 'Angular and React '],
+                answer: 2
+            }, {
+                q: 'DARPA, the agency that has funded a great deal of American AI research, is part of the Department of ',
+                options: ['Defense ', 'Energy ', 'Education ', 'Justice '],
+                answer: 0
+            }, {
+                q: 'Which one is not part of AR System  main blocks',
+                options: ['Tracker Unit', 'Processing Unit', 'Data Unit', 'Visual Unit'],
+                answer: 2
+            }, {
+                q: 'Data minimization states',
+                options: ['Information will be collected in accurete manner', 'Collect minimal information from individual consistent', 'purpose of collection and use of info will be provided in a clear manner', 'Information will be collected in accurete manner to ensure interest of individual'],
+                answer: 1
+            }, {
+                q: 'The first computer program to solve maths problems is',
+                options: ['WABOT', 'ELIZA', 'CMI', 'Photo Maths'],
+                answer: 1
+            }, {
+                q: 'The first intellegent Humanoid robot is',
+                options: ['ELIZA', 'Deep Blue', 'WABOT', 'Sophia'],
+                answer: 2
+            }, {
+                q: 'Which one of the following is AI platform',
+                options: ['Azure', 'KAA', 'SiteWhere', 'Zetta'],
+                answer: 0
+            }, {
+                q: 'Professor at the Stanford University who coined the word artificial intelligence in 1956 was',
+                options: ['David Levy', 'John McCarthy', 'Joseph Weizenbaum', 'Hans Berliner'],
+                answer: 1
+            }, {
+                q: 'A type of technology in which user are visually isolated from the real enviroment',
+                options: ['VR', 'AV', 'MR', 'AR'],
+                answer: 0
+            }, {
+                q: 'Which of the following IoT layer is a user-centric layer that execute various task for the user?',
+                options: ['Data processing layer', 'Network Layer', 'Application Layer', 'Sensing Layer'],
+                answer: 2
+            }, {
+                q: 'Abebe Sends a secured message for Alemitu digitally, and Worku access this message without thier permission. Which privacy is compromised.',
+                options: ['Information Privacy', 'Communication Privacy', 'Individual Privacy', 'None'],
+                answer: 1
+            }, {
+                q: 'The technique for determining whether a computer could or could not demonstrate the artificial Intelligence',
+                options: ['Turing Test', 'Algorithm', 'Boolean Algebra', 'Logarithm'],
+                answer: 0
+            }, {
+                q: 'Who is a father of AI?',
+                options: ['Alain Colmerauer', ' John McCarthy', 'Nicklaus Wirth', 'Seymour Papert'],
+                answer: 1
+            }, {
+                q: 'One of the following is not common example of data type',
+                options: ['Integer', 'Float', 'Text', 'Variable'],
+                answer: 2
+            }, {
+                q: 'The Sitewhere platform',
+                options: ['Manage an Unlimited number of connected devices', 'Eclipse Colifornium for CoAP messaging', 'InfluxDB for event data storage', 'all except A'],
+                answer: 3
+            }, {
+                q: 'Cloud Computing also known as ',
+                options: ['On-Demand Computing', 'Grid Computing', 'SMART Computing', 'Edge Computing'],
+                answer: 0
+            }, {
+                q: 'The Blockchain is ',
+                options: ['Distributed', 'Decentralized', 'Both a and b', 'None'],
+                answer: 1
+            }, {
+                q: '_____ compares the output given by the D-A Converter to the actual (expected) output stored in it and stores the approved output.',
+                options: ['Sensor', 'Actuator', 'Switches', 'Display'],
+                answer: 1
+            }, {
+                q: 'The process of collecting, organizing and collecting large sets of data called as',
+                options: ['WSN', 'Cloud Computing', 'Big Data', 'None of above'],
+                answer: 2
+            }, {
+                q: 'The field of neural network with several hidden layer',
+                options: ['Machine Learning', 'Deep Learning', 'Expreinced Learning', 'Algorithims'],
+                answer: 1
+            }, {
+                q: 'Which one is web development framework developed by facebook',
+                options: ['node', 'react', 'bootstrap', 'html'],
+                answer: 1
+            }, {
+                q: 'What is Software?',
+                options: ['Software is documentation and configuration of data', 'Software is set of programs, documentation and configuration of data', 'Software is set of programs', 'None of the mentioned'],
+                answer: 1
+            }, {
+                q: 'Which one is example of AR',
+                options: ['Google Cardboard', 'Pockemon Go', 'Oculus rifty', 'None'],
+                answer: 1
+            }, {
+                q: 'Discipline that deals with programming the systems so as to make them automatically learn and improve with experience',
+                options: ['Machine Learning', 'AI', 'Data Science', 'None'],
+                answer: 0
+            }
+
+        ]
+
+        totalQuestionsSpan.innerHTML = questions.length
+
+        function load() {
+            questionNumberSpan.innerHTML = index + 1
+            question.innerHTML = questions[currentIndex].q;
+            opt1.innerHTML = questions[currentIndex].options[0]
+            opt2.innerHTML = questions[currentIndex].options[1]
+            opt3.innerHTML = questions[currentIndex].options[2]
+            opt4.innerHTML = questions[currentIndex].options[3]
+            index++
+        }
+
+        //Check if selected answer is correct or wrong
+        function check(element) {
+            if (element.id == questions[currentIndex].answer) {
+                element.className = "correct"
+                updateAnswersTracker("correct")
+                score++
+            } else {
+                element.className = "wrong"
+                updateAnswersTracker("wrong")
+            }
+            disableClick();
+        }
+
+        //Make sure the user selected an item before clicking on the Next button
+        function validate() {
+            if (!options[0].classList.contains("disabled")) {
+                alert("Please select an option")
+            } else {
+                randomQuestion();
+                enableClick();
+            }
+        }
+
+        //Listener function for click event on Next button
+        function next() {
+            validate();
+        }
+
+        //Function to disable click for the options
+        function disableClick() {
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.add("disabled")
+
+                if (options[i].id == questions[currentIndex].answer) {
+                    options[i].classList.add('correct');
+                }
+            }
+        }
+
+        //Function to reanable click in the options
+        function enableClick() {
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove("disabled", "correct", "wrong")
+
+            }
+        }
+
+        //Function to select a random question
+        function randomQuestion() {
+            let randomNumber = Math.floor(Math.random() * questions.length);
+            if (index == questions.length) {
+                quizOver();
+            } else {
+                if (answeredQuestions.length > 0) {
+                    if (answeredQuestions.includes(randomNumber)) {
+                        randomQuestion();
+                    } else {
+                        currentIndex = randomNumber;
+                        load();
+                    }
+                }
+                if (answeredQuestions.length == 0) {
+                    currentIndex = randomNumber
+                    load()
+                }
+                //add the question to list of anwered questions
+                answeredQuestions.push(randomNumber)
+            }
+        }
+
+        //Restart the quiz
+        window.onload = function() {
+            this.randomQuestion();
+            this.answersTracker();
+        }
+
+        //Set up answers tracker elements
+        function answersTracker() {
+            for (let i = 0; i < questions.length; i++) {
+                const div = document.createElement("div")
+                answersTrackerContainer.appendChild(div);
+            }
+        }
+
+        //Update the answers tracker elements
+        function updateAnswersTracker(newClass) {
+            answersTrackerContainer.children[index - 1].classList.add(newClass)
+        }
+
+        //Displays the quiz-over page if quiz is over
+        function quizOver() {
+            document.querySelector(".quiz-over").classList.add("show")
+            correctAnswersSpan.innerHTML = score;
+            totalQuestionsSpan2.innerHTML = questions.length
+            percentageSpan.innerHTML = Math.round((score / questions.length) * 100) + "%"
+        }
+
+        function tryAgain() {
+            window.location.reload();
+        }
+    </script>
+</body>
+
+</html>
